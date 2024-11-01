@@ -19,6 +19,8 @@ function loadPosts() {
     fetch(baseUrl + '/posts')
         .then(response => response.json())  // Parse the JSON data from the response
         .then(data => {  // Once the data is ready, we can use it
+
+            const posts = data.posts;
             // Clear out the post container first
             const postContainer = document.getElementById('post-container');
             postContainer.innerHTML = '';
