@@ -5,7 +5,7 @@ from flask_limiter.util import get_remote_address
 
 app = Flask(__name__)
 limiter = Limiter(app=app, key_func=get_remote_address)
-CORS(app)  # This will enable CORS for all routes
+CORS(app, resources={r"/*": {"origins": "http://127.0.0.1:5001"}})
 
 POSTS = [
     {"id": 1, "title": "First post", "content": "This is the first post."},
@@ -32,7 +32,7 @@ def home():
     return "Welcome to the Masterblog API"
 
 @app.route('/api/posts', methods=['GET'])
-@limiter.limit("5 per minute")
+@limiter.limit("30 per minute")
 def get_posts():
     """
     Endpoint to retrieve all posts, with optional sorting by title or content.
